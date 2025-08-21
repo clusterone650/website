@@ -35,6 +35,21 @@
     .muted{color:var(--muted)}
     .pill{display:inline-block;padding:.35rem .6rem;border:1px solid rgba(128,128,128,.22);border-radius:999px;font-size:.85rem}
     footer{padding:28px 0;border-top:1px solid rgba(128,128,128,.12)}
+
+    /* === Nav responsive (hamburger) === */
+    .nav{position:relative} /* ajoute position pour le menu mobile */
+    .nav-links{display:flex;align-items:center;gap:.6rem}
+    .hamburger{display:none;background:transparent;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:.6rem .8rem;cursor:pointer;color:#fff}
+    .hamburger:focus-visible{outline:none;box-shadow:var(--ring)}
+    .hamburger svg{width:22px;height:22px}
+    .mobile-menu{display:none;position:absolute;right:20px;top:100%;background:var(--panel);border:1px solid rgba(128,128,128,.18);border-radius:12px;min-width:220px;box-shadow:var(--shadow);padding:8px}
+    .mobile-menu a{display:block;padding:10px 12px;border-radius:10px}
+    .mobile-menu a:hover{background:rgba(255,255,255,.06)}
+    @media (max-width:820px){
+      .nav-links{display:none}
+      .hamburger{display:inline-flex;align-items:center;justify-content:center}
+    }
+    .mobile-open .mobile-menu{display:block}
   </style>
 </head>
 <body>
@@ -45,10 +60,23 @@
         <img class="logo-img" src="assets/logo.png" alt="Thomas Octave Informatique" onerror="this.style.display='none'">
         <span>Thomas&nbsp;Octave&nbsp;Informatique</span>
       </a>
-      <nav style="display:flex;gap:.6rem;align-items:center">
+
+      <!-- NAV desktop + hamburger -->
+      <nav class="nav-links" aria-label="Liens principaux">
         <a class="btn btn-ghost" href="/">Accueil</a>
-        <a class="btn btn-ghost" href="contact.html">Contact</a>
+        <a class="btn btn-ghost" href="about.html" aria-current="page">À propos</a>
+        <a class="btn btn-primary" href="contact.html">Contact</a>
       </nav>
+      <button class="hamburger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="mobile-menu" id="mobile-menu" role="menu">
+        <a href="/" role="menuitem">Accueil</a>
+        <a href="about.html" role="menuitem" aria-current="page">À propos</a>
+        <a href="contact.html" role="menuitem">Contact</a>
+      </div>
     </div>
   </header>
 
@@ -59,13 +87,13 @@
         <!-- Présentation -->
         <section class="card" aria-labelledby="bio-title">
           <h2 id="bio-title">Thomas OCTAVE</h2>
-          <p class="muted">Je suis informaticien indépendant basé à <strong>Seraing</strong>, en Province de <strong>Liège</strong>. J’aide les <strong>particuliers</strong> et les <strong>TPE/PME</strong> à résoudre leurs problèmes informatiques au quotidien : dépannage PC/, réseaux & Wi‑Fi, cybersécurité, sauvegardes, récupération de données, <strong>numérisation de cassettes vidéo</strong> et création de sites vitrines.</p>
-          <p class="muted">Ma priorité : des explications <strong>claires</strong>, des solutions <strong>fiables</strong> et la <strong>sécurité</strong> de vos données. J’interviens sur site à Liège et alentours, et à distance partout en Belgique.</p>
+          <p class="muted">Je suis informaticien indépendant basé à <strong>Seraing</strong>, en Province de <strong>Liège</strong>. J’aide les <strong>particuliers</strong> et les <strong>TPE/PME</strong> à résoudre leurs problèmes informatiques au quotidien : dépannage PC/, réseaux & Wi-Fi, cybersécurité, sauvegardes, récupération de données, <strong>numérisation de cassettes vidéo</strong> et création de sites vitrines.</p>
+          <p class="muted">Ma priorité : des explications <strong>claires</strong>, des solutions <strong>fiables</strong> et la <strong>sécurité</strong> de vos données. J’interviens sur site à Liège et alentours, et à distance partout en Belgique.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
             <span class="pill">Windows</span>
             <span class="pill">Linux</span>
             <span class="pill">Infrastructure</span>
-            <span class="pill">Réseaux & Wi‑Fi</span>
+            <span class="pill">Réseaux & Wi-Fi</span>
             <span class="pill">Cloud & Sauvegarde</span>
           </div>
         </section>
@@ -73,9 +101,9 @@
         <aside class="card" aria-label="Visuel">
           <img src="assets/logo.png" alt="Logo Thomas Octave Informatique" style="max-height:160px; margin:auto">
           <ul class="muted" style="margin:14px 0 0; padding-left:1.1rem">
-            <li><strong>Localisation</strong> : Seraing (Liège)</li>
-            <li><strong>Zone d’intervention</strong> : Liège & alentours, à distance (Belgique)</li>
-            <li><strong>Contact</strong> : <a href="mailto:info@thomas-octave.be">info@thomas-octave.be</a></li>
+            <li><strong>Localisation</strong> : Seraing (Liège)</li>
+            <li><strong>Zone d’intervention</strong> : Liège & alentours, à distance (Belgique)</li>
+            <li><strong>Contact</strong> : <a href="mailto:info@thomas-octave.be">info@thomas-octave.be</a></li>
           </ul>
           <div style="margin-top:12px">
             <a class="btn btn-primary" href="contact.html">Me contacter</a>
@@ -88,10 +116,10 @@
         <h2 id="skills-title">Compétences & services</h2>
         <div class="grid grid-3">
           <div class="card"><h3>Dépannage & réparation</h3><p class="muted">Diagnostic rapide, remise en service PC/Linux, imprimantes, SSD/HDD.</p></div>
-          <div class="card"><h3>Réseaux & Wi‑Fi</h3><p class="muted">Routeurs, Wi‑Fi maillé, VPN, NAS, partage et sauvegardes.</p></div>
+          <div class="card"><h3>Réseaux & Wi-Fi</h3><p class="muted">Routeurs, Wi-Fi maillé, VPN, NAS, partage et sauvegardes.</p></div>
           <div class="card"><h3>Cybersécurité</h3><p class="muted">Antivirus/EDR, MFA, bonnes pratiques et durcissement.</p></div>
           <div class="card"><h3>Récupération de données</h3><p class="muted">Analyse et tentative de récupération sur disques et clés.</p></div>
-          <div class="card"><h3>Numérisation vidéo</h3><p class="muted">VHS, VHS‑C, Hi8/Video8, MiniDV → MP4/H.264.</p></div>
+          <div class="card"><h3>Numérisation vidéo</h3><p class="muted">VHS, VHS-C, Hi8/Video8, MiniDV → MP4/H.264.</p></div>
           <div class="card"><h3>Site vitrine</h3><p class="muted">Site léger, SEO de base, formulaires et analytics.</p></div>
         </div>
       </section>
@@ -120,7 +148,7 @@
         <div class="card" style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
           <div>
             <h2 style="margin:.2rem 0 .3rem">Travaillons ensemble</h2>
-            <p class="muted" style="margin:0">Un projet ou un souci informatique ? Je réponds rapidement par e‑mail.</p>
+            <p class="muted" style="margin:0">Un projet ou un souci informatique ? Je réponds rapidement par e-mail.</p>
           </div>
           <a class="btn btn-primary" href="contact.html">Me contacter</a>
         </div>
@@ -156,7 +184,30 @@
   </script>
 
   <script>
+    // Année dynamique
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menu hamburger
+    const burger = document.getElementById('burger');
+    const headerNav = document.querySelector('header .nav');
+    if (burger && headerNav) {
+      burger.addEventListener('click', () => {
+        const isOpen = headerNav.classList.toggle('mobile-open');
+        burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      document.addEventListener('click', (e) => {
+        if (!headerNav.contains(e.target)) {
+          headerNav.classList.remove('mobile-open');
+          burger.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          headerNav.classList.remove('mobile-open');
+          burger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
   </script>
 </body>
 </html>
