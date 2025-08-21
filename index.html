@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thomas Octave Informatique — Dépannage, Maintenance, Cybersécurité & Numérisation (Liège)</title>
+  <meta name="description" content="Informaticien à Seraing (Liège) pour particuliers et TPE/PME : dépannage PC/Linux, réseaux & Wi‑Fi, sauvegardes, cybersécurité, récupération de données, numérisation de cassettes vidéo et création de sites web. Devis gratuit.">
+  <meta property="og:title" content="Thomas Octave Informatique — Services informatiques à Seraing & Liège">
+  <meta property="og:description" content="Dépannage, maintenance, réseaux, cybersécurité, numérisation de cassettes vidéo et création de sites web. Intervention sur site à Liège et à distance.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thomas-octave.be/">
+  <meta property="og:image" content="https://thomas-octave.be/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/logo.png">
+  <style>
+    /* ===== Design stable (compatibilité large) ===== */
+    :root{
+      --bg:#0b0f17;        /* fond principal (dark) */
+      --panel:#121826;     /* panneaux/cartes */
+      --text:#e7ebf2;      /* texte */
+      --muted:#98a2b3;     /* texte secondaire */
+      --brand:#6c9eff;     /* bleu */
+      --brand2:#00e599;    /* vert */
+      --accent:#ffd166;    /* jaune */
+      --danger:#ff6b6b;    /* rouge */
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --ring:0 0 0 4px rgba(108,158,255,.35);
+      --maxw:1180px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{--bg:#f7f9ff;--panel:#ffffff;--text:#0e1320;--muted:#5b6471;--shadow:0 10px 25px rgba(18,22,34,.08)}
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial; color:var(--text); background:var(--bg)}
+    img{max-width:100%; display:block}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--maxw); margin-inline:auto; padding:0 20px}
+
+    /* Arrière-plan discret et performant */
+    .bg-grid{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.5; background-image: linear-gradient(rgba(120,140,180,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(120,140,180,.12) 1px, transparent 1px); background-size:22px 22px}
+    .bg-halo{position:fixed; inset:0; z-index:-2; pointer-events:none; background: radial-gradient(700px 400px at 80% -20%, rgba(108,158,255,.25), transparent 60%), radial-gradient(700px 400px at 0% 120%, rgba(0,229,153,.18), transparent 60%)}
+
+    /* Boutons */
+    .btn{display:inline-flex; align-items:center; gap:.5rem; border:none; cursor:pointer; border-radius:999px; padding:.9rem 1.2rem; font-weight:700; transition:transform .08s ease, box-shadow .2s ease, background .2s ease}
+    .btn:focus-visible{outline:none; box-shadow:var(--ring)}
+    .btn-primary{background:linear-gradient(135deg, var(--brand), #8bb3ff); color:#06101e}
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-ghost{background:transparent; border:1px solid rgba(255,255,255,.18); color:var(--text)}
+
+    .badge{display:inline-flex; gap:.4rem; align-items:center; font-size:.8rem; padding:.35rem .6rem; border-radius:999px; background:rgba(108,158,255,.18); color:#d7e4ff}
+
+    /* Header */
+    header{position:sticky; top:0; z-index:50; background:rgba(11,15,23,.7); border-bottom:1px solid rgba(128,128,128,.12); -webkit-backdrop-filter:saturate(180%) blur(10px); backdrop-filter:saturate(180%) blur(10px)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .logo{display:flex; align-items:center; gap:.6rem; font-weight:900; letter-spacing:.2px}
+    .logo-mark{width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg, var(--brand), var(--brand2)); box-shadow:0 0 18px rgba(108,158,255,.4), inset 0 0 18px rgba(255,255,255,.18)}
+    .logo-img{height:28px; width:auto; display:block}
+
+    /* Hero */
+    .hero{padding:72px 0}
+    .hero-inner{display:grid; gap:40px; grid-template-columns:1.15fr 1fr; align-items:center}
+    @media (max-width:930px){.hero-inner{grid-template-columns:1fr}}
+    h1{font-size:clamp(2rem,6vw,3.1rem); line-height:1.1; margin:.25rem 0 1rem}
+    h2{font-size:clamp(1.4rem,4vw,2rem); margin:0 0 1rem}
+    p.lead{font-size:clamp(1rem,2.4vw,1.18rem); color:var(--muted); margin:0 0 1.2rem}
+    .pill{display:inline-block; padding:.35rem .6rem; border:1px solid rgba(128,128,128,.22); border-radius:999px; font-size:.85rem}
+
+    /* Layouts */
+    .grid{display:grid; gap:20px}
+    .grid-3{grid-template-columns:repeat(3, 1fr)}
+    .grid-4{grid-template-columns:repeat(4, 1fr)}
+    @media (max-width:1000px){.grid-4{grid-template-columns:1fr 1fr}}
+    @media (max-width:700px){.grid-3,.grid-4{grid-template-columns:1fr}}
+    .split{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+    @media (max-width:900px){.split{grid-template-columns:1fr}}
+
+    /* Cards */
+    .card{background:var(--panel); border:1px solid rgba(128,128,128,.18); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+    .card h3{margin:.2rem 0 .4rem; font-size:1.05rem}
+
+    .section{padding:44px 0}
+    .section .header{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:18px}
+    .muted{color:var(--muted)}
+
+    /* Formulaire */
+    .form{display:grid; gap:12px}
+    .input, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(128,128,128,.2); background:#0f1420; color:var(--text)}
+    .input:focus, textarea:focus{outline:none; box-shadow:var(--ring)}
+    .notice{font-size:.9rem; color:var(--muted)}
+
+    footer{padding:28px 0; border-top:1px solid rgba(128,128,128,.12)}
+    .footer-grid{display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center}
+    @media (max-width:700px){.footer-grid{grid-template-columns:1fr}}
+
+    .icon{width:22px; height:22px; flex:0 0 auto; color:#8bd8c0}
+    .title-with-icon{display:flex; align-items:center; gap:.6rem}
+  </style>
+</head>
+<body>
+  <div class="bg-halo" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav" role="navigation" aria-label="Navigation principale">
+      <a href="#" class="logo" aria-label="Page d'accueil">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <img class="logo-img" src="assets/logo.png" alt="Thomas Octave Informatique" onerror="this.style.display='none'">
+        <span>Thomas&nbsp;Octave&nbsp;Informatique</span>
+      </a>
+      <nav class="nav-cta" aria-label="Appels à l'action">
+        <a class="btn btn-ghost" href="#services">Services</a>
+	<a class="btn btn-ghost" href="about.html">À propos</a>
+        <a class="btn btn-primary" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="badge" aria-label="Disponibilité">Intervention à distance & sur site</span>
+        <h1>Dépannage, maintenance, cybersécurité & numérisation à Liège</h1>
+        <p class="lead">Basé à <strong>Seraing</strong> (Province de <strong>Liège</strong>). PC/Linux, réseaux & Wi‑Fi, sauvegardes, récupération de données, suppression de virus, <strong>numérisation de cassettes vidéo</strong>, création de sites web. Service rapide, clair et sans jargon.</p>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.6rem">
+          <a class="btn btn-primary" href="#contact">Demander un devis</a>
+          <a class="btn btn-ghost" href="#services">Voir les services</a>
+        </div>
+        <div class="muted" style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
+          <span class="pill">Windows</span><span class="pill">Linux</span><span class="pill">Infrastructure</span><span class="pill">Réseaux & Wi‑Fi</span><span class="pill">Cloud & Sauvegarde</span>
+        </div>
+      </div>
+<div class="hero-illu" aria-label="Illustration services informatiques">
+        <!-- Illustration SVG orientée IT -->
+        <svg viewBox="0 0 900 600" role="img" aria-labelledby="heroTitle heroDesc" xmlns="http://www.w3.org/2000/svg">
+          <title id="heroTitle">Informatique : réseau, cybersécurité et dépannage</title>
+          <desc id="heroDesc">Un écran, un bouclier de cybersécurité, des nœuds de réseau et un signal Wi‑Fi.</desc>
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#6c9eff"/>
+              <stop offset="100%" stop-color="#00e599"/>
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Screen -->
+          <rect x="200" y="140" width="420" height="260" rx="16" fill="#0c1220" stroke="url(#g1)" stroke-width="2"/>
+          <rect x="220" y="160" width="380" height="220" rx="12" fill="#0f172a"/>
+          <rect x="340" y="420" width="140" height="14" rx="7" fill="#0c1220"/>
+          <!-- Shield -->
+          <path d="M640 190 l60 24 v56c0 44-32 84-60 98-28-14-60-54-60-98v-56z" fill="#0c1220" stroke="url(#g1)" stroke-width="2" filter="url(#glow)"/>
+          <path d="M640 225 l20 18 32-30" fill="none" stroke="#00e599" stroke-width="6" stroke-linecap="round"/>
+          <!-- Wifi -->
+          <g stroke="#6c9eff" stroke-width="6" fill="none" stroke-linecap="round">
+            <path d="M270 250 q90-80 180 0"/>
+            <path d="M300 280 q60-50 120 0"/>
+            <path d="M335 310 q25-20 50 0"/>
+          </g>
+          <!-- Network nodes -->
+          <g stroke="url(#g1)" stroke-width="2" fill="#0c1220">
+            <circle cx="220" cy="170" r="8"/>
+            <circle cx="620" cy="150" r="8"/>
+            <circle cx="700" cy="320" r="8"/>
+            <circle cx="520" cy="460" r="8"/>
+            <path d="M220 170 L 620 150 L 700 320 L 520 460 L 220 170" opacity=".7"/>
+          </g>
+          <!-- Code lines -->
+          <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#9aa4b2">
+            <text x="240" y="190">$ sudo apt update</text>
+            <text x="240" y="212">$ netsh wlan show drivers</text>
+            <text x="240" y="234">$ chkdsk /f</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="header">
+        <h2>Mes services</h2>
+        <p class="muted">Assistance complète pour vos besoins informatiques, à domicile, en atelier ou à distance.</p>
+      </div>
+      <div class="grid grid-4">
+        <article class="card" aria-label="Dépannage & réparation">
+          <h3 class="title-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 7l-4 4 7 7 4-4-7-7z"/><path d="M7 14l-3 3"/><path d="M11 3l1.5 1.5"/></svg>
+            Dépannage & réparation
+          </h3>
+          <p class="muted">PC/Linux lents, pannes, écran bleu, SSD/HDD, imprimantes. Diagnostic et remise en service.</p>
+        </article>
+        <article class="card" aria-label="Réseaux & Wi‑Fi">
+          <h3 class="title-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 8a15 15 0 0 1 20 0"/><path d="M5 11a10 10 0 0 1 14 0"/><path d="M8.5 14.5a5 5 0 0 1 7 0"/><circle cx="12" cy="18" r="1"/></svg>
+            Réseaux & Wi‑Fi
+          </h3>
+          <p class="muted">Installation, optimisation Wi‑Fi, routeurs, VPN, NAS, partage de fichiers, câblage.</p>
+        </article>
+        <article class="card" aria-label="Cybersécurité & sauvegardes">
+          <h3 class="title-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 9-8 9s-8-4-8-9V7l8-4z"/><path d="M9.5 12.5l1.8 1.8 3.2-3.2"/></svg>
+            Cybersécurité & sauvegardes
+          </h3>
+          <p class="muted">Antivirus/EDR, pare‑feu, MFA, backup local & cloud, plan de reprise d’activité.</p>
+        </article>
+        <article class="card" aria-label="Récupération de données">
+          <h3 class="title-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M12 13v5"/><path d="M8 14l4 4 4-4"/></svg>
+            Récupération de données
+          </h3>
+          <p class="muted">Disques, clés USB, cartes SD, fichiers supprimés — analyse et tentative de récupération.</p>
+        </article>
+        <article class="card" aria-label="Maintenance TPE/PME">
+          <h3 class="title-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V22a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H2a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0A1.65 1.65 0 0 0 9 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0A1.65 1.65 0 0 0 20.91 11H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Maintenance TPE/PME
+          </h3>
+          <p class="muted">Contrats, mises à jour, supervision, gestion de parc, assistance prioritaire.</p>
+        </article>
+        <article class="card" aria-label="Création de site web">
+          <h3 class="title-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 4h18v16H3z"/><path d="M3 8h18"/><circle cx="6" cy="6" r="1"/><circle cx="9" cy="6" r="1"/><path d="M7 12h10M7 16h6"/></svg>
+            Création de site vitrine
+          </h3>
+          <p class="muted">Site rapide, SEO de base, formulaires, hébergement & nom de domaine, analytics.</p>
+        </article>
+        <article class="card" aria-label="Assistance à distance">
+          <h3 class="title-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 12l3 3 5-5"/></svg>
+            Assistance à distance
+          </h3>
+          <p class="muted">Prise en main sécurisée pour résoudre vos problèmes en quelques clics.</p>
+        </article>
+        <article class="card" aria-label="Numérisation de cassettes vidéo">
+          <h3 class="title-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="12" r="2"/><path d="M3 9h18M3 15h18"/></svg>
+            Numérisation de cassettes vidéo
+          </h3>
+          <p class="muted">VHS, VHS‑C, Hi8/Video8, MiniDV… converties en MP4/H.264. Corrections de base, livraison clé USB ou lien cloud.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Focus Numérisation Vidéo -->
+  <section class="section" id="numerisation">
+    <div class="container split">
+      <div class="card">
+        <h3>Numérisation de cassettes vidéo analogiques</h3>
+        <ul class="muted" style="margin:0; padding-left:1.1rem">
+          <li><strong>Supports</strong> : VHS, VHS‑C, Video8/Hi8, MiniDV</li>
+          <li><strong>Sortie</strong> : MP4/H.264 (qualité optimisée; Full HD si source le permet)</li>
+          <li><strong>Options</strong> : nettoyage, stabilisation légère, correction des couleurs, découpe</li>
+          <li><strong>Livraison</strong> : clé USB fournie ou lien cloud sécurisé</li>
+          <li><strong>Conseil</strong> : sauvegarde 3‑2‑1 pour préserver vos souvenirs</li>
+        </ul>
+        <div style="margin-top:12px">
+          <a class="btn btn-primary" href="#contact">Demander un devis</a>
+          <a class="btn btn-ghost" href="#faq-video">Questions fréquentes</a>
+        </div>
+      </div>
+      <div class="card" aria-label="Illustration cassette vidéo">
+        <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cassTitle cassDesc">
+          <title id="cassTitle">Cassette vidéo et conversion numérique</title>
+          <desc id="cassDesc">Cassette VHS stylisée reliée à une icône de fichier MP4.</desc>
+          <rect x="140" y="210" width="360" height="180" rx="10" fill="#0f172a" stroke="#6c9eff" stroke-width="3"/>
+          <circle cx="230" cy="300" r="36" fill="#0c1220" stroke="#6c9eff"/>
+          <circle cx="410" cy="300" r="36" fill="#0c1220" stroke="#6c9eff"/>
+          <rect x="200" y="240" width="240" height="40" rx="6" fill="#0c1220" stroke="#00e599"/>
+          <path d="M500 300 H 640" stroke="#6c9eff" stroke-width="4"/>
+          <rect x="640" y="250" width="120" height="120" rx="12" fill="#0f172a" stroke="#6c9eff" stroke-width="3"/>
+          <text x="660" y="318" font-size="28" fill="#9aa4b2" font-family="ui-monospace, monospace">MP4</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+
+   <!-- Zone d’intervention -->
+  <section class="section" aria-labelledby="zone">
+    <div class="container">
+      <div class="header">
+        <h2 id="zone">Zone d’intervention</h2>
+        <p class="muted">Basé à Seraing (Province de Liège). Déplacements à Liège et alentours. Interventions à distance partout en Belgique.</p>
+      </div>
+      <div class="grid grid-2 services-list">
+        <div class="card"><strong>Sur site</strong><br><span class="muted">Domicile & bureaux (sur rendez‑vous)</span></div>
+        <div class="card"><strong>À distance</strong><br><span class="muted">Partout — via un outil sécurisé</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq">
+    <div class="container">
+      <div class="header"><h2>Questions fréquentes</h2></div>
+      <details>
+        <summary>Intervenez‑vous à domicile et en entreprise&nbsp;?</summary>
+        <p class="muted">Oui, sur rendez‑vous. J’interviens aussi à distance pour les cas compatibles.</p>
+      </details>
+      <details>
+        <summary>Proposez‑vous des contrats de maintenance&nbsp;?</summary>
+        <p class="muted">Oui, pour TPE/PME avec supervision, mises à jour, sauvegardes et assistance prioritaire.</p>
+      </details>
+      <details>
+        <summary>Mes données sont‑elles en sécurité&nbsp;?</summary>
+        <p class="muted">Je privilégie le chiffrement, les sauvegardes 3‑2‑1 et l’authentification multi‑facteurs.</p>
+      </details>
+      <details>
+        <summary>Que se passe‑t‑il si la réparation n’est pas possible&nbsp;?</summary>
+        <p class="muted">Je propose des alternatives (remplacement, migration, récupération). Aucun frais caché.</p>
+      </details>
+      <details id="faq-video">
+        <summary>Quels formats de cassettes prenez‑vous en charge&nbsp;?</summary>
+        <p class="muted">VHS, VHS‑C, Video8/Hi8 et MiniDV. Autres formats sur demande.</p>
+      </details>
+      <details>
+        <summary>Dans quel format livrez‑vous les fichiers&nbsp;?</summary>
+        <p class="muted">Par défaut en MP4/H.264 compatible TV, ordinateur et smartphone. Livraison via clé USB ou lien cloud sécurisé.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        © <span id="year"></span> Thomas Octave Informatique — Tous droits réservés.
+      </div>
+      <nav aria-label="Liens de bas de page" style="display:flex; gap:12px; flex-wrap:wrap">
+        <a class="muted" href="#">Mentions légales</a>
+        <a class="muted" href="#">Politique de confidentialité</a>
+        <a class="muted" href="#">Conditions</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Données structurées (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Thomas Octave Informatique",
+    "url": "https://thomas-octave.be/",
+    "image": "https://thomas-octave.be/og-image.jpg",
+    "email": "info@thomas-octave.be",
+    "areaServed": "Seraing et Liège",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Seraing",
+      "addressRegion": "Liège",
+      "postalCode": "4100",
+      "addressCountry": "BE"
+    },
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "serviceType": [
+      "Dépannage informatique",
+      "Maintenance",
+      "Récupération de données",
+      "Cybersécurité",
+      "Réseaux Wi‑Fi & câblage",
+      "Sauvegarde & Cloud",
+      "Création de site web",
+      "Numérisation de cassettes vidéo analogiques"
+    ]
+  }
+  </script>
+
+  <script>
+    // Année dynamique
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Traitement du formulaire (compatible Formspree)
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.textContent = 'Envoi en cours…';
+        try {
+          const data = new FormData(form);
+          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if (res.ok) {
+            status.textContent = 'Merci ! Votre message a bien été envoyé.';
+            form.reset();
+          } else {
+            status.textContent = "Échec de l'envoi. Vous pouvez m'écrire à info@thomas-octave.be.";
+          }
+        } catch(err){
+          status.textContent = "Hors‑ligne ? Écrivez‑moi à info@thomas-octave.be.";
+        }
+      });
+    }
+  </script>
+</body>
+</html>

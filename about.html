@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>À propos — Thomas Octave Informatique (Seraing, Liège)</title>
+  <meta name="description" content="À propos de Thomas Octave Informatique : informaticien indépendant à Seraing (Liège). Dépannage, réseaux, cybersécurité, sauvegardes, numérisation vidéo, sites web.">
+  <link rel="icon" href="assets/logo.png">
+  <style>
+    :root{--bg:#0b0f17;--panel:#121826;--text:#e7ebf2;--muted:#98a2b3;--brand:#6c9eff;--brand2:#00e599;--radius:16px;--shadow:0 10px 30px rgba(0,0,0,.35);--ring:0 0 0 4px rgba(108,158,255,.35);--maxw:1000px}
+    @media (prefers-color-scheme: light){:root{--bg:#f7f9ff;--panel:#ffffff;--text:#0e1320;--muted:#5b6471;--shadow:0 10px 25px rgba(18,22,34,.08)}}
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial;color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--maxw);margin-inline:auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:10;background:rgba(11,15,23,.7);border-bottom:1px solid rgba(128,128,128,.12);backdrop-filter:saturate(180%) blur(10px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:900;letter-spacing:.2px}
+    .logo-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand2))}
+    .logo-img{height:28px;width:auto;display:block}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;cursor:pointer;border-radius:999px;padding:.9rem 1.2rem;font-weight:700;transition:transform .08s,box-shadow .2s,background .2s}
+    .btn:focus-visible{outline:none;box-shadow:var(--ring)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),#8bb3ff);color:#06101e}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.18)}
+    h1{font-size:clamp(1.9rem,4.5vw,2.6rem);line-height:1.15;margin:1rem 0}
+    h2{font-size:clamp(1.3rem,3.5vw,1.6rem);margin:.6rem 0}
+    .section{padding:36px 0}
+    .grid{display:grid;gap:22px}
+    .split{grid-template-columns:1.1fr .9fr}
+    @media(max-width:900px){.split{grid-template-columns:1fr}}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    @media(max-width:900px){.grid-3{grid-template-columns:1fr}}
+    .card{background:var(--panel);border:1px solid rgba(128,128,128,.18);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+    .muted{color:var(--muted)}
+    .pill{display:inline-block;padding:.35rem .6rem;border:1px solid rgba(128,128,128,.22);border-radius:999px;font-size:.85rem}
+    footer{padding:28px 0;border-top:1px solid rgba(128,128,128,.12)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="/" class="logo" aria-label="Retour à l'accueil">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <img class="logo-img" src="assets/logo.png" alt="Thomas Octave Informatique" onerror="this.style.display='none'">
+        <span>Thomas&nbsp;Octave&nbsp;Informatique</span>
+      </a>
+      <nav style="display:flex;gap:.6rem;align-items:center">
+        <a class="btn btn-ghost" href="/">Accueil</a>
+        <a class="btn btn-ghost" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>À propos</h1>
+      <div class="grid split">
+        <!-- Présentation -->
+        <section class="card" aria-labelledby="bio-title">
+          <h2 id="bio-title">Thomas OCTAVE</h2>
+          <p class="muted">Je suis informaticien indépendant basé à <strong>Seraing</strong>, en Province de <strong>Liège</strong>. J’aide les <strong>particuliers</strong> et les <strong>TPE/PME</strong> à résoudre leurs problèmes informatiques au quotidien : dépannage PC/, réseaux & Wi‑Fi, cybersécurité, sauvegardes, récupération de données, <strong>numérisation de cassettes vidéo</strong> et création de sites vitrines.</p>
+          <p class="muted">Ma priorité : des explications <strong>claires</strong>, des solutions <strong>fiables</strong> et la <strong>sécurité</strong> de vos données. J’interviens sur site à Liège et alentours, et à distance partout en Belgique.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+            <span class="pill">Windows</span>
+            <span class="pill">Linux</span>
+            <span class="pill">Infrastructure</span>
+            <span class="pill">Réseaux & Wi‑Fi</span>
+            <span class="pill">Cloud & Sauvegarde</span>
+          </div>
+        </section>
+        <!-- Visuel / Logo -->
+        <aside class="card" aria-label="Visuel">
+          <img src="assets/logo.png" alt="Logo Thomas Octave Informatique" style="max-height:160px; margin:auto">
+          <ul class="muted" style="margin:14px 0 0; padding-left:1.1rem">
+            <li><strong>Localisation</strong> : Seraing (Liège)</li>
+            <li><strong>Zone d’intervention</strong> : Liège & alentours, à distance (Belgique)</li>
+            <li><strong>Contact</strong> : <a href="mailto:info@thomas-octave.be">info@thomas-octave.be</a></li>
+          </ul>
+          <div style="margin-top:12px">
+            <a class="btn btn-primary" href="contact.html">Me contacter</a>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Compétences principales -->
+      <section class="section" aria-labelledby="skills-title">
+        <h2 id="skills-title">Compétences & services</h2>
+        <div class="grid grid-3">
+          <div class="card"><h3>Dépannage & réparation</h3><p class="muted">Diagnostic rapide, remise en service PC/Linux, imprimantes, SSD/HDD.</p></div>
+          <div class="card"><h3>Réseaux & Wi‑Fi</h3><p class="muted">Routeurs, Wi‑Fi maillé, VPN, NAS, partage et sauvegardes.</p></div>
+          <div class="card"><h3>Cybersécurité</h3><p class="muted">Antivirus/EDR, MFA, bonnes pratiques et durcissement.</p></div>
+          <div class="card"><h3>Récupération de données</h3><p class="muted">Analyse et tentative de récupération sur disques et clés.</p></div>
+          <div class="card"><h3>Numérisation vidéo</h3><p class="muted">VHS, VHS‑C, Hi8/Video8, MiniDV → MP4/H.264.</p></div>
+          <div class="card"><h3>Site vitrine</h3><p class="muted">Site léger, SEO de base, formulaires et analytics.</p></div>
+        </div>
+      </section>
+
+      <!-- Méthode de travail -->
+      <section class="section" aria-labelledby="process-title">
+        <h2 id="process-title">Ma façon de travailler</h2>
+        <div class="grid grid-3">
+          <div class="card"><h3>1. Diagnostic</h3><p class="muted">Évaluation du besoin et recommandations claires.</p></div>
+          <div class="card"><h3>2. Devis</h3><p class="muted">Transparence totale sur les coûts et délais.</p></div>
+          <div class="card"><h3>3. Intervention</h3><p class="muted">Sur site ou à distance, avec suivi des actions.</p></div>
+        </div>
+      </section>
+
+      <!-- Outils & technologies -->
+      <section class="section" aria-labelledby="tools-title">
+        <h2 id="tools-title">Outils & technologies</h2>
+        <div class="grid grid-3">
+          <div class="card"><h3>Systèmes</h3><p class="muted">Windows, distributions Linux.</p></div>
+          <div class="card"><h3>Réseau</h3><p class="muted">Routeurs, points d’accès, VLAN, VPN, NAS.</p></div>
+          <div class="card"><h3>Web</h3><p class="muted">HTML/CSS, sites vitrines, formulaires, SEO de base.</p></div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="cta">
+        <div class="card" style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+          <div>
+            <h2 style="margin:.2rem 0 .3rem">Travaillons ensemble</h2>
+            <p class="muted" style="margin:0">Un projet ou un souci informatique ? Je réponds rapidement par e‑mail.</p>
+          </div>
+          <a class="btn btn-primary" href="contact.html">Me contacter</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>© <span id="year"></span> Thomas Octave Informatique — Tous droits réservés.</div>
+      <nav style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="muted" href="/">Accueil</a>
+        <a class="muted" href="contact.html">Contact</a>
+        <a class="muted" href="#">Mentions légales</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Données structurées -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "À propos — Thomas Octave Informatique",
+    "url": "https://thomas-octave.be/about.html",
+    "about": {
+      "@type": "Organization",
+      "name": "Thomas Octave Informatique",
+      "email": "info@thomas-octave.be",
+      "areaServed": "Seraing et Liège"
+    }
+  }
+  </script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Thomas Octave Informatique (Seraing, Liège)</title>
+  <meta name="description" content="Contactez Thomas Octave Informatique : e‑mail, formulaires et infos pratiques. Basé à Seraing (Liège). Intervention sur site et à distance.">
+  <link rel="icon" href="assets/logo.png">
+  <style>
+    :root{--bg:#0b0f17;--panel:#121826;--text:#e7ebf2;--muted:#98a2b3;--brand:#6c9eff;--brand2:#00e599;--radius:16px;--shadow:0 10px 30px rgba(0,0,0,.35);--ring:0 0 0 4px rgba(108,158,255,.35);--maxw:980px}
+    @media (prefers-color-scheme: light){:root{--bg:#f7f9ff;--panel:#ffffff;--text:#0e1320;--muted:#5b6471;--shadow:0 10px 25px rgba(18,22,34,.08)}}
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial;color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--maxw);margin-inline:auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:10;background:rgba(11,15,23,.7);border-bottom:1px solid rgba(128,128,128,.12);backdrop-filter:saturate(180%) blur(10px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:900;letter-spacing:.2px}
+    .logo-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand2))}
+    .logo-img{height:28px;width:auto;display:block}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;cursor:pointer;border-radius:999px;padding:.9rem 1.2rem;font-weight:700;transition:transform .08s,box-shadow .2s,background .2s}
+    .btn:focus-visible{outline:none;box-shadow:var(--ring)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),#8bb3ff);color:#06101e}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.18)}
+    h1{font-size:clamp(1.8rem,4.5vw,2.4rem);line-height:1.15;margin:1rem 0}
+    .section{padding:36px 0}
+    .grid{display:grid;gap:22px}
+    .split{grid-template-columns:1.2fr .8fr}
+    @media(max-width:900px){.split{grid-template-columns:1fr}}
+    .card{background:var(--panel);border:1px solid rgba(128,128,128,.18);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+    .muted{color:var(--muted)}
+    .form{display:grid;gap:12px}
+    .input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(128,128,128,.2);background:#0f1420;color:var(--text)}
+    .input:focus,textarea:focus{outline:none;box-shadow:var(--ring)}
+    footer{padding:28px 0;border-top:1px solid rgba(128,128,128,.12)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="/" class="logo" aria-label="Retour à l'accueil">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <img class="logo-img" src="assets/logo.png" alt="Thomas Octave Informatique" onerror="this.style.display='none'">
+        <span>Thomas&nbsp;Octave&nbsp;Informatique</span>
+      </a>
+      <nav>
+        <a class="btn btn-ghost" href="/">← Retour au site</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Contact</h1>
+      <p class="muted">Basé à <strong>Seraing</strong>, Province de <strong>Liège</strong>. Interventions sur site à Liège et alentours, et à distance partout en Belgique.</p>
+      <div class="grid split">
+        <!-- Formulaire -->
+        <section class="card" aria-labelledby="form-title">
+          <h2 id="form-title">Formulaire de contact</h2>
+          <form class="form" id="contact-form" method="POST" action="/contact">
+	    <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px">
+            <!-- Alternative : Netlify Forms (retirez action, ajoutez data-netlify="true" + input hidden form-name) -->
+            <input class="input" name="name" placeholder="Votre nom" aria-label="Nom" required>
+            <input class="input" type="email" name="email" placeholder="Votre e‑mail" aria-label="Email" required>
+            <input class="input" name="subject" placeholder="Objet (ex. Dépannage Wi‑Fi)" aria-label="Objet" required>
+            <textarea class="input" name="message" rows="6" placeholder="Décrivez votre besoin…" aria-label="Message" required></textarea>
+            <button class="btn btn-primary" type="submit">Envoyer</button>
+            <p id="form-status" class="muted" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <!-- Infos personnelles / entreprise -->
+        <aside class="card" aria-labelledby="info-title">
+          <h2 id="info-title">Informations</h2>
+          <ul class="muted" style="margin:0; padding-left:1.1rem">
+            <li><strong>Entreprise</strong> : Thomas Octave Informatique</li>
+            <li><strong>E‑mail</strong> : <a href="mailto:info@thomas-octave.be">info@thomas-octave.be</a></li>
+            <li><strong>Localisation</strong> : Seraing (Liège), Belgique</li>
+            <li><strong>Zone d’intervention</strong> : Liège & alentours, à distance (Belgique)</li>
+          </ul>
+          <div style="margin-top:12px">
+            <a class="btn btn-ghost" href="mailto:info@thomas-octave.be">Écrire par e‑mail</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>© <span id="year"></span> Thomas Octave Informatique — Tous droits réservés.</div>
+      <nav style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="muted" href="/">Accueil</a>
+        <a class="muted" href="#">Mentions légales</a>
+        <a class="muted" href="#">Confidentialité</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Données structurées -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Thomas Octave Informatique",
+    "url": "https://thomas-octave.be/contact.html",
+    "email": "info@thomas-octave.be",
+    "areaServed": "Seraing et Liège",
+    "address": {"@type":"PostalAddress","addressLocality":"Seraing","addressRegion":"Liège","postalCode":"4100","addressCountry":"BE"},
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "contactPoint": [{"@type":"ContactPoint","contactType":"customer support","email":"info@thomas-octave.be"}]
+  }
+  </script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const form=document.getElementById('contact-form');
+    const status=document.getElementById('form-status');
+    if(form){
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        status.textContent='Envoi en cours…';
+        try{
+          const data=new FormData(form);
+          const res=await fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}});
+          if(res.ok){status.textContent='Merci ! Votre message a bien été envoyé.'; form.reset();}
+          else{status.textContent="Échec de l'envoi. Vous pouvez m'écrire à info@thomas-octave.be."}
+        }catch(err){status.textContent="Hors‑ligne ? Écrivez‑moi à info@thomas-octave.be."}
+      });
+    }
+  </script>
+</body>
+</html>
