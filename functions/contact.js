@@ -27,7 +27,7 @@ export async function onRequestPost({ request, env }) {
     const ua = request.headers.get("user-agent") || "";
 
     const to = env.TO_EMAIL || "info@thomas-octave.be";
-    const from = env.FROM_EMAIL || "no-reply@thomas-octave.be";
+    const from = env.FROM_EMAIL || "info@thomas-octave.be";
 
     const text = `Nouvelle demande de devis\n\n`+
       `Nom: ${name}\n`+
