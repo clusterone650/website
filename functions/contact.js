@@ -1,11 +1,10 @@
-// Cloudflare Pages Function — handles POST /contact
-// Sends an email via MailChannels (no external account needed)
-//
-// 1) In your Cloudflare Pages project, go to Settings ▸ Environment variables
-//    Add: TO_EMAIL = info@thomas-octave.be
-//         FROM_EMAIL = no-reply@thomas-octave.be   (or info@thomas-octave.be)
-// 2) Place this file at /functions/contact.js in your repo (or upload in Pages UI)
-// 3) Point your form action to "/contact" (method="POST") and send form fields: name, email, subject, message, website(honeypot)
+// /functions/contact.js — Cloudflare Pages Function using Resend API
+// 1) Get an API key at https://resend.com, then set it in Cloudflare Pages:
+//    Settings → Environment variables → add RESEND_API_KEY (secret)
+//    (Optionally) add RESEND_FROM (e.g. "Thomas Octave <info@thomas-octave.be>")
+//    (Optionally) add CONTACT_TO (defaults to info@thomas-octave.be)
+// 2) While your domain isn't verified in Resend, keep RESEND_FROM unset — we will use onboarding@resend.dev.
+// 3) Your form should POST to /contact with fields: name, email, subject, message and a hidden honeypot "website".
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -14,65 +13,47 @@ export async function onRequestPost({ request, env }) {
     const email = (form.get("email") || "").toString().trim().slice(0, 200);
     const subject = (form.get("subject") || "Demande de devis").toString().trim().slice(0, 150);
     const message = (form.get("message") || "").toString().trim().slice(0, 8000);
-    const honeypot = (form.get("website") || "").toString(); // hidden field — if filled => bot
+    const honeypot = (form.get("website") || "").toString(); // if filled → bot
 
-    // Simple validation
+    if (honeypot) return json({ ok: true }); // silently accept bots
     const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (honeypot) return json({ ok: true }); // silently accept spam
-    if (!name || !isEmail || !message) {
-      return json({ ok: false, error: "invalid_input" }, 400);
-    }
+    if (!name || !isEmail || !message) return json({ ok:false, error:"invalid_input" }, 400);
 
     const ip = request.headers.get("cf-connecting-ip") || "";
     const ua = request.headers.get("user-agent") || "";
 
-    const to = env.TO_EMAIL || "info@thomas-octave.be";
-    const from = env.FROM_EMAIL || "no-reply@thomas-octave.be";
+    const RESEND_API_KEY = env.RESEND_API_KEY;
+    if (!RESEND_API_KEY) return json({ ok:false, error:"missing_api_key" }, 500);
+
+    const from = env.RESEND_FROM || "Thomas Octave <onboarding@resend.dev>"; // use your domain after verification
+    const to = env.CONTACT_TO || "info@thomas-octave.be";
 
     const text = `Nouvelle demande de devis\n\n`+
-      `Nom: ${name}\n`+
-      `Email: ${email}\n`+
-      `Sujet: ${subject}\n`+
-      `IP: ${ip}\n`+
-      `UA: ${ua}\n\n`+
-      `${message}`;
+      `Nom: ${name}\nEmail: ${email}\nSujet: ${subject}\n`+
+      `IP: ${ip}\nUA: ${ua}\n\n${message}`;
 
     const html = `<!doctype html><meta charset="utf-8">`+
       `<h2>Nouvelle demande de devis</h2>`+
       `<table style="border-collapse:collapse;font:14px system-ui,Segoe UI,Roboto"><tbody>`+
-      row("Nom", escapeHtml(name))+
-      row("Email", escapeHtml(email))+
-      row("Sujet", escapeHtml(subject))+
-      row("IP", escapeHtml(ip))+
-      row("UA", escapeHtml(ua))+
-      `</tbody></table>`+
-      `<pre style="white-space:pre-wrap;font:14px ui-monospace,Consolas,Menlo">${escapeHtml(message)}</pre>`;
+      row("Nom", esc(name))+row("Email", esc(email))+row("Sujet", esc(subject))+row("IP", esc(ip))+row("UA", esc(ua))+`</tbody></table>`+
+      `<pre style="white-space:pre-wrap;font:14px ui-monospace,Consolas,Menlo">${esc(message)}</pre>`;
 
-    const payload = {
-      personalizations: [{ to: [{ email: to }] }],
-      from: { email: from, name: "Formulaire site web" },
-      reply_to: { email, name },
-      subject: `Demande de devis — ${subject}`,
-      content: [
-        { type: "text/plain", value: text },
-        { type: "text/html", value: html }
-      ],
-    };
+    const payload = { from, to, reply_to: email, subject: `Demande de devis — ${subject}`, text, html };
 
-    const resp = await fetch("https://api.mailchannels.net/tx/v1/send", {
+    const resp = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        "authorization": `Bearer ${RESEND_API_KEY}`
+      },
       body: JSON.stringify(payload)
     });
 
-    if (!resp.ok) {
-      const detail = await resp.text();
-      return json({ ok: false, error: "mail_error", detail }, 502);
-    }
-
-    return json({ ok: true });
+    const bodyText = await resp.text().catch(() => "");
+    if (!resp.ok) return json({ ok:false, error:"resend_error", status: resp.status, detail: bodyText }, 502);
+    return json({ ok:true, status: resp.status });
   } catch (err) {
-    return json({ ok: false, error: "server_error" }, 500);
+    return json({ ok:false, error:"server_error" }, 500);
   }
 }
 
@@ -80,11 +61,9 @@ function row(k, v){
   return `<tr><th style="text-align:left;padding:6px 8px;border:1px solid #ddd;background:#f7f7f7">${k}</th>`+
          `<td style="padding:6px 8px;border:1px solid #ddd">${v}</td></tr>`
 }
-
-function escapeHtml(s){
-  return s.replace(/[&<>\"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+function esc(s){
+  return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 }
-
 function json(obj, status=200){
   return new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json" } });
 }
