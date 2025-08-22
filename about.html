@@ -54,6 +54,52 @@
     .mobile-open .mobile-menu{display:block}
   </style>
 
+<style>
+    :root{
+    --btn-py: .65rem;   /* hauteur (avant .9rem) */
+    --btn-px: .90rem;   /* largeur  (avant 1.2rem) */
+    --btn-fs: .95rem;   /* texte    (≈ 15.2px)     */
+      }
+
+     .btn{
+      padding: var(--btn-py) var(--btn-px) !important;
+      font-size: var(--btn-fs) !important;
+}
+    </style>
+
+<style>
+/* Inversion de couleurs au hover — sans contour */
+.btn-primary:hover{
+  background: transparent !important;     /* passe en “vide” */
+  color: var(--brand) !important;         /* texte bleu */
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.btn-ghost:hover{
+  background: linear-gradient(135deg, var(--brand), #8bb3ff) !important; /* devient “plein” */
+  color:#06101e !important;               /* texte foncé lisible */
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* (optionnel) même logique pour le burger */
+.hamburger:hover{
+  background: linear-gradient(135deg, var(--brand), #8bb3ff) !important;
+  color:#06101e !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Accessibilité : garder un indicateur au clavier uniquement */
+.btn:focus-visible,
+.hamburger:focus-visible{
+  outline: none !important;
+  border: none !important;
+  box-shadow: var(--ring) !important;     /* focus clavier */
+}
+</style>
+	
 <!-- ======= FORCE DARK MODE (ajout minimal, ne touche pas au contenu) ======= -->
   <style>
     :root{ color-scheme: dark; }             /* contrôles/formulaires en sombre */
