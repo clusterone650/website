@@ -110,6 +110,11 @@
 
     .icon{width:22px; height:22px; flex:0 0 auto; color:#8bd8c0}
     .title-with-icon{display:flex; align-items:center; gap:.6rem}
+
+    /* Curseur clignotant pour les logs */
+    @keyframes blink { 50% { opacity:.12 } }
+    .blink { animation: blink 1s steps(1,end) infinite }
+    @media (prefers-reduced-motion: reduce){ .blink { animation:none } }
   </style>
 </head>
 <body>
@@ -160,10 +165,10 @@
         </div>
       </div>
       <div class="hero-illu" aria-label="Illustration services informatiques">
-        <!-- Illustration SVG orientée IT -->
+        <!-- Nouveau SVG avec terminal à logs tournants -->
         <svg viewBox="0 0 900 600" role="img" aria-labelledby="heroTitle heroDesc" xmlns="http://www.w3.org/2000/svg">
           <title id="heroTitle">Informatique : réseau, cybersécurité et dépannage</title>
-          <desc id="heroDesc">Un écran, un bouclier de cybersécurité, des nœuds de réseau et un signal Wi-Fi.</desc>
+          <desc id="heroDesc">Un écran, un bouclier de cybersécurité, des nœuds de réseau et un signal Wi-Fi, avec un terminal qui affiche des logs en temps réel.</desc>
           <defs>
             <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
               <stop offset="0%" stop-color="#6c9eff"/>
@@ -174,32 +179,43 @@
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
-          <!-- Screen -->
+
+          <!-- Écran -->
           <rect x="200" y="140" width="420" height="260" rx="16" fill="#0c1220" stroke="url(#g1)" stroke-width="2"/>
           <rect x="220" y="160" width="380" height="220" rx="12" fill="#0f172a"/>
           <rect x="340" y="420" width="140" height="14" rx="7" fill="#0c1220"/>
-          <!-- Shield -->
+
+          <!-- Fenêtre "terminal" dans l’écran -->
+          <rect x="230" y="170" width="360" height="200" rx="10" fill="#0b1324" stroke="#21304a"/>
+          <g transform="translate(235,178)">
+            <circle cx="10" cy="10" r="4" fill="#ff5f56"/>
+            <circle cx="24" cy="10" r="4" fill="#ffbd2e"/>
+            <circle cx="38" cy="10" r="4" fill="#27c93f"/>
+            <text x="56" y="14" font-size="11" fill="#9aa4b2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">Logs système</text>
+          </g>
+          <!-- Zone de texte animée -->
+          <g id="hero-cli" transform="translate(245,200)" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#d4deed" aria-label="Sortie du terminal">
+            <text id="hero-cli-text"></text>
+          </g>
+
+          <!-- Bouclier -->
           <path d="M640 190 l60 24 v56c0 44-32 84-60 98-28-14-60-54-60-98v-56z" fill="#0c1220" stroke="url(#g1)" stroke-width="2" filter="url(#glow)"/>
           <path d="M640 225 l20 18 32-30" fill="none" stroke="#00e599" stroke-width="6" stroke-linecap="round"/>
-          <!-- Wifi -->
+
+          <!-- Wi-Fi -->
           <g stroke="#6c9eff" stroke-width="6" fill="none" stroke-linecap="round">
             <path d="M270 250 q90-80 180 0"/>
             <path d="M300 280 q60-50 120 0"/>
             <path d="M335 310 q25-20 50 0"/>
           </g>
-          <!-- Network nodes -->
+
+          <!-- Nœuds réseau -->
           <g stroke="url(#g1)" stroke-width="2" fill="#0c1220">
             <circle cx="220" cy="170" r="8"/>
             <circle cx="620" cy="150" r="8"/>
             <circle cx="700" cy="320" r="8"/>
             <circle cx="520" cy="460" r="8"/>
             <path d="M220 170 L 620 150 L 700 320 L 520 460 L 220 170" opacity=".7"/>
-          </g>
-          <!-- Code lines -->
-          <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#9aa4b2">
-            <text x="240" y="190">$ sudo apt update</text>
-            <text x="240" y="212">$ netsh wlan show drivers</text>
-            <text x="240" y="234">$ chkdsk /f</text>
           </g>
         </svg>
       </div>
@@ -291,145 +307,112 @@
           <a class="btn btn-ghost" href="#faq-video">Questions fréquentes</a>
         </div>
       </div>
-<div class="card" aria-label="Illustration cassette vers clé USB">
-  <svg viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" style="width:100%;height:auto;aspect-ratio:21/9">
-    <title id="t">Conversion d’une cassette vidéo vers une clé USB</title>
-    <desc id="d">Une cassette avec bobines animées est reliée par un flux lumineux vers une clé USB, représentant la numérisation.</desc>
+      <div class="card" aria-label="Illustration cassette vers clé USB">
+        <svg viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" style="width:100%;height:auto;aspect-ratio:21/9">
+          <title id="t">Conversion d’une cassette vidéo vers une clé USB</title>
+          <desc id="d">Une cassette avec bobines animées est reliée par un flux lumineux vers une clé USB, représentant la numérisation.</desc>
 
-    <defs>
-      <linearGradient id="gA" x1="0" x2="1" y1="0" y2="1">
-        <stop offset="0%" stop-color="#6c9eff"/>
-        <stop offset="100%" stop-color="#00e599"/>
-      </linearGradient>
-      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="6" result="b"/>
-        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
+          <defs>
+            <linearGradient id="gA" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#6c9eff"/>
+              <stop offset="100%" stop-color="#00e599"/>
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
 
-    <!-- Styles internes à l’SVG (auto-contenus) -->
-    <style>
-      @keyframes spinL { to { transform: rotate(360deg); } }
-      @keyframes spinR { to { transform: rotate(-360deg); } }
-      @keyframes dash  { to { stroke-dashoffset: -1000; } }
-      .reelL,.reelR{ transform-box: fill-box; transform-origin: center; }
-      .reelL{ animation: spinL 9s linear infinite }
-      .reelR{ animation: spinR 12s linear infinite }
-      .flow{ stroke-dasharray: 10 12; animation: dash 18s linear infinite }
-      @media (prefers-reduced-motion: reduce) {
-        .reelL,.reelR,.flow{ animation: none }
-        .spark{ display:none }
-      }
-    </style>
+          <style>
+            @keyframes spinL { to { transform: rotate(360deg); } }
+            @keyframes spinR { to { transform: rotate(-360deg); } }
+            @keyframes dash  { to { stroke-dashoffset: -1000; } }
+            .reelL,.reelR{ transform-box: fill-box; transform-origin: center; }
+            .reelL{ animation: spinL 9s linear infinite }
+            .reelR{ animation: spinR 12s linear infinite }
+            .flow{ stroke-dasharray: 10 12; animation: dash 18s linear infinite }
+            @media (prefers-reduced-motion: reduce) {
+              .reelL,.reelR,.flow{ animation: none }
+              .spark{ display:none }
+            }
+          </style>
 
-    <!-- Cassette à gauche -->
-    <g transform="translate(70,90)">
-      <rect x="0" y="0" width="520" height="300" rx="14" fill="#0f172a" stroke="url(#gA)" stroke-width="3"/>
-      <rect x="30" y="40" width="460" height="140" rx="10" fill="#0b1324" stroke="#21304a"/>
-      <rect x="165" y="220" width="190" height="24" rx="6" fill="#0b1324" stroke="#21304a"/>
-      <g fill="#0b1324" stroke="url(#gA)" stroke-width="3" filter="url(#glow)">
-        <circle class="reelL" cx="120" cy="110" r="50"/>
-        <circle class="reelR" cx="400" cy="110" r="50"/>
-      </g>
-      <rect x="105" y="90" width="290" height="40" rx="8" fill="none" stroke="#37527e" opacity=".7"/>
-    </g>
+          <!-- Cassette -->
+          <g transform="translate(70,90)">
+            <rect x="0" y="0" width="520" height="300" rx="14" fill="#0f172a" stroke="url(#gA)" stroke-width="3"/>
+            <rect x="30" y="40" width="460" height="140" rx="10" fill="#0b1324" stroke="#21304a"/>
+            <rect x="165" y="220" width="190" height="24" rx="6" fill="#0b1324" stroke="#21304a"/>
+            <g fill="#0b1324" stroke="url(#gA)" stroke-width="3" filter="url(#glow)">
+              <circle class="reelL" cx="120" cy="110" r="50"/>
+              <circle class="reelR" cx="400" cy="110" r="50"/>
+            </g>
+            <rect x="105" y="90" width="290" height="40" rx="8" fill="none" stroke="#37527e" opacity=".7"/>
+          </g>
 
-    <!-- Chemin de conversion (courbe) -->
-    <path id="wire" d="M 610 240 C 760 240 770 140 920 140" fill="none" stroke="url(#gA)" stroke-width="5" class="flow" stroke-linecap="round"/>
-    <path d="M 915 140 l 20 -10 v 20 z" fill="#6c9eff"/>
+          <!-- Chemin -->
+          <path id="wire" d="M 610 240 C 760 240 770 140 920 140" fill="none" stroke="url(#gA)" stroke-width="5" class="flow" stroke-linecap="round"/>
+          <path d="M 915 140 l 20 -10 v 20 z" fill="#6c9eff"/>
 
-    <!-- Étincelles qui voyagent -->
-    <g class="spark" filter="url(#glow)">
-      <circle r="4" fill="#ffd166">
-        <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
-          <mpath href="#wire"/>
-        </animateMotion>
-      </circle>
-      <circle r="4" fill="#6c9eff">
-        <animateMotion dur="8s" begin="1s" repeatCount="indefinite" rotate="auto">
-          <mpath href="#wire"/>
-        </animateMotion>
-      </circle>
-    </g>
+          <!-- Étincelles -->
+          <g class="spark" filter="url(#glow)">
+            <circle r="4" fill="#ffd166">
+              <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#wire"/>
+              </animateMotion>
+            </circle>
+            <circle r="4" fill="#6c9eff">
+              <animateMotion dur="8s" begin="1s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#wire"/>
+              </animateMotion>
+            </circle>
+          </g>
 
-    <!-- Clé USB à droite -->
-<!-- Clé USB réaliste (type-A) -->
-<g transform="translate(920,60)" aria-label="Clé USB 3.0 réaliste">
-  <!-- Dégradés spécifiques à la clé -->
-  <defs>
-    <!-- Corps plastique (légère variation haut/bas) -->
-    <linearGradient id="usbPlastic" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#141e33"/>
-    </linearGradient>
-    <!-- Reflet biseauté -->
-    <linearGradient id="usbHighlight" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0%" stop-color="rgba(255,255,255,.28)"/>
-      <stop offset="60%" stop-color="rgba(255,255,255,.06)"/>
-      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-    </linearGradient>
-    <!-- Métal brossé -->
-    <linearGradient id="usbMetal" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#dfe6f2"/>
-      <stop offset="50%" stop-color="#b9c6db"/>
-      <stop offset="100%" stop-color="#8aa1c2"/>
-    </linearGradient>
-    <!-- Or des contacts -->
-    <linearGradient id="usbGold" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#ffd67a"/>
-      <stop offset="100%" stop-color="#caa64e"/>
-    </linearGradient>
-  </defs>
+          <!-- Clé USB réaliste -->
+          <g transform="translate(920,60)" aria-label="Clé USB 3.0 réaliste">
+            <defs>
+              <linearGradient id="usbPlastic" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#0f172a"/>
+                <stop offset="100%" stop-color="#141e33"/>
+              </linearGradient>
+              <linearGradient id="usbHighlight" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0%" stop-color="rgba(255,255,255,.28)"/>
+                <stop offset="60%" stop-color="rgba(255,255,255,.06)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </linearGradient>
+              <linearGradient id="usbMetal" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#dfe6f2"/>
+                <stop offset="50%" stop-color="#b9c6db"/>
+                <stop offset="100%" stop-color="#8aa1c2"/>
+              </linearGradient>
+              <linearGradient id="usbGold" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#ffd67a"/>
+                <stop offset="100%" stop-color="#caa64e"/>
+              </linearGradient>
+            </defs>
 
-  <!-- Ombre portée douce -->
-  <ellipse cx="90" cy="310" rx="85" ry="18" fill="rgba(0,0,0,.28)"/>
-
-  <!-- Corps plastique -->
-  <rect x="0" y="70" width="180" height="240" rx="22"
-        fill="url(#usbPlastic)" stroke="url(#gA)" stroke-width="3" />
-
-  <!-- Reflet latéral -->
-  <path d="M15,82 h80 a18,18 0 0 1 18,18 v180 a18,18 0 0 1 -18,18 h-80 z"
-        fill="url(#usbHighlight)" opacity=".22"/>
-
-  <!-- LED (pulse) -->
-  <circle cx="24" cy="98" r="5" fill="#36d399" filter="url(#glow)">
-    <animate attributeName="opacity" values="0.2;1;0.2" dur="2.4s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Sérigraphie -->
-  <text x="22" y="210" font-size="18" fill="#9aa4b2"
-        font-family="ui-monospace,Consolas,Menlo,monospace">USB 3.0</text>
-
-  <!-- Tête métallique (connecteur type-A) -->
-  <g transform="translate(120,120)">
-    <!-- Coquille métal -->
-    <rect x="0" y="0" width="86" height="120" rx="8"
-          fill="url(#usbMetal)" stroke="#5a6f8e" />
-    <!-- Liseré façade -->
-    <rect x="3" y="3" width="80" height="114" rx="6"
-          fill="none" stroke="#c9d4e6" opacity=".55"/>
-
-    <!-- Insert bleu (USB 3.x) -->
-    <rect x="10" y="18" width="66" height="84" rx="4" fill="#2b6fff" opacity=".7"/>
-
-    <!-- Ouvertures sup/inf (trous) -->
-    <rect x="14" y="26" width="24" height="18" rx="3" fill="#0e1a2a"/>
-    <rect x="14" y="76" width="24" height="18" rx="3" fill="#0e1a2a"/>
-
-    <!-- Détails/traits du bord -->
-    <line x1="0" y1="60" x2="86" y2="60" stroke="#92a6c3" opacity=".35"/>
-    <line x1="43" y1="0" x2="43" y2="120" stroke="#92a6c3" opacity=".22"/>
-
-    <!-- Contacts dorés (visibles à travers l’insert) -->
-    <g opacity=".85">
-      <rect x="42" y="30" width="28" height="10" rx="2" fill="url(#usbGold)"/>
-      <rect x="42" y="82" width="28" height="10" rx="2" fill="url(#usbGold)"/>
-    </g>
-  </g>
-</g>
-  </svg>
-</div>
+            <ellipse cx="90" cy="310" rx="85" ry="18" fill="rgba(0,0,0,.28)"/>
+            <rect x="0" y="70" width="180" height="240" rx="22" fill="url(#usbPlastic)" stroke="url(#gA)" stroke-width="3" />
+            <path d="M15,82 h80 a18,18 0 0 1 18,18 v180 a18,18 0 0 1 -18,18 h-80 z" fill="url(#usbHighlight)" opacity=".22"/>
+            <circle cx="24" cy="98" r="5" fill="#36d399" filter="url(#glow)">
+              <animate attributeName="opacity" values="0.2;1;0.2" dur="2.4s" repeatCount="indefinite"/>
+            </circle>
+            <text x="22" y="210" font-size="18" fill="#9aa4b2" font-family="ui-monospace,Consolas,Menlo,monospace">USB 3.0</text>
+            <g transform="translate(120,120)">
+              <rect x="0" y="0" width="86" height="120" rx="8" fill="url(#usbMetal)" stroke="#5a6f8e" />
+              <rect x="3" y="3" width="80" height="114" rx="6" fill="none" stroke="#c9d4e6" opacity=".55"/>
+              <rect x="10" y="18" width="66" height="84" rx="4" fill="#2b6fff" opacity=".7"/>
+              <rect x="14" y="26" width="24" height="18" rx="3" fill="#0e1a2a"/>
+              <rect x="14" y="76" width="24" height="18" rx="3" fill="#0e1a2a"/>
+              <line x1="0" y1="60" x2="86" y2="60" stroke="#92a6c3" opacity=".35"/>
+              <line x1="43" y1="0" x2="43" y2="120" stroke="#92a6c3" opacity=".22"/>
+              <g opacity=".85">
+                <rect x="42" y="30" width="28" height="10" rx="2" fill="url(#usbGold)"/>
+                <rect x="42" y="82" width="28" height="10" rx="2" fill="url(#usbGold)"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
     </div>
   </section>
 
@@ -567,6 +550,111 @@
         }
       });
     }
+  </script>
+
+  <!-- Logs tournants du terminal (Hero) -->
+  <script>
+  (() => {
+    const textNode = document.getElementById('hero-cli-text');
+    if (!textNode) return;
+
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const MAX_LINES = 10;
+    const ROW_H = 16;
+    const SPINNER = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏'];
+
+    const buffer = [];
+    let tick = 0;
+    const INTERVAL = 120;
+    const NEWLINE_EVERY = 8;
+
+    let frame=0, timeSec=0, sizeMiB=0, bitrate=1200, uploadPct=0;
+
+    function pad(n, w=4){ return String(n).padStart(w,' '); }
+    function fmtTime(sec){
+      const m = Math.floor(sec/60), s = sec%60;
+      return `00:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+    function clock(){
+      const d=new Date();
+      return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`;
+    }
+
+    function pushLine(){
+      const phase = Math.floor(tick/NEWLINE_EVERY) % 6;
+      let line = '';
+      switch(phase){
+        case 0:
+          line = `[info ${clock()}] Démarrage tâches planifiées… OK`;
+          break;
+        case 1:
+          frame += 256; timeSec += 4; sizeMiB += 8; bitrate += 3;
+          line = `[ffmpeg] frame=${pad(frame)} fps=${48 + ((frame/256)|0)%5} q=${(23 - ((frame/512)|0)%3).toFixed(1)} size=${sizeMiB}MiB time=${fmtTime(timeSec)} bitrate=${bitrate.toFixed(1)}kbits/s`;
+          break;
+        case 2:
+          line = `[network] ping 1.1.1.1 : ${18 + (tick%10)} ms — ${['OK','OK','OK','OK','loss 1%'][tick%5]}`;
+          break;
+        case 3:
+          line = `[security] EDR scan /home : ${['aucune menace','aucune menace','1 fichier suspect'][(Math.floor(tick/NEWLINE_EVERY))%3]}`;
+          break;
+        case 4:
+          uploadPct = (uploadPct + 7) % 101;
+          const bars = Math.floor(uploadPct/10);
+          const bar = `[${'#'.repeat(bars)}${'-'.repeat(10-bars)}] ${uploadPct}% ${SPINNER[tick%SPINNER.length]}`;
+          line = `[backup] Upload vers cloud : ${bar}`;
+          break;
+        case 5:
+          line = `[disk] SMART sda — temp ${35 + ((Math.floor(tick/NEWLINE_EVERY))%5)}°C • état: OK`;
+          break;
+      }
+      buffer.push(line);
+      if (buffer.length > MAX_LINES) buffer.shift();
+    }
+
+    function paint(){
+      while (textNode.firstChild) textNode.removeChild(textNode.firstChild);
+      buffer.forEach((ln, i) => {
+        let out = ln;
+        if (out.includes('Upload vers cloud')) {
+          out = out.replace(/(⠋|⠙|⠹|⠸|⠼|⠴|⠦|⠧|⠇|⠏)?$/, SPINNER[tick%SPINNER.length]);
+        }
+        const t = document.createElementNS('http://www.w3.org/2000/svg','tspan');
+        t.setAttribute('x','0');
+        t.setAttribute('y', String(i*ROW_H));
+        t.textContent = out;
+        textNode.appendChild(t);
+      });
+      const cursor = document.createElementNS('http://www.w3.org/2000/svg','tspan');
+      cursor.setAttribute('x','0');
+      cursor.setAttribute('y', String(buffer.length*ROW_H));
+      cursor.setAttribute('class','blink');
+      cursor.textContent = ' ▍';
+      textNode.appendChild(cursor);
+    }
+
+    if (reduce){
+      buffer.push(
+        `[info ${clock()}] Démarrage tâches planifiées… OK`,
+        `[ffmpeg] size=128MiB time=00:01:20 bitrate=1300.0kbits/s`,
+        `[network] ping 1.1.1.1 : 23 ms — OK`,
+        `[security] EDR scan /home : aucune menace`,
+        `[backup] Upload vers cloud : [#####-----] 50%`,
+        `[disk] SMART sda — temp 38°C • état: OK`
+      );
+      paint();
+      return;
+    }
+
+    for (let i=0;i<6;i++){ tick += NEWLINE_EVERY; pushLine(); }
+    tick = 0; paint();
+
+    setInterval(() => {
+      tick++;
+      if (tick % NEWLINE_EVERY === 0) pushLine();
+      paint();
+    }, INTERVAL);
+  })();
   </script>
 </body>
 </html>
