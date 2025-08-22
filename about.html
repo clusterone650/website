@@ -83,16 +83,12 @@
     }
   </style>
   <!-- ======================================================================= -->
-	<style>
-		.bg-grid { z-index: 0; }     /* au lieu de -1 */
-		.bg-halo { z-index: -1; }    /* le halo reste derrière la grille */
-	</style>
 
 	<style>
-	header, .hero, .section, footer { 
-  	position: relative; 
-  	z-index: 1; 
-	}
+	header{ z-index:100 !important; }          
+	.nav{ position:relative; overflow:visible; }/* ancre le positionnement absolu du menu */
+	.mobile-menu{ z-index:1000; }               /* passe devant le hero */
+	.hamburger{ position:relative; z-index:1001;}/* le bouton reste cliquable au-dessus */
 	</style>
   
 </head>
