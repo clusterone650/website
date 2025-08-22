@@ -172,11 +172,10 @@
 
 /* Icône via <img> au format des autres pictos */
 .icon-img{
-  width:22px; height:22px;
-  object-fit:contain;
-  flex:0 0 auto;
-  display:inline-block;
-  vertical-align:middle;
+  width:22px; height:22px; display:inline-block; flex:0 0 auto;
+  background: currentColor; /* prend la couleur du texte */
+  -webkit-mask: url('assets/contrat.png') center / contain no-repeat;
+          mask: url('assets/contrat.png') center / contain no-repeat;
 }
 	</style>
 	
