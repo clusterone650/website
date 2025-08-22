@@ -127,6 +127,74 @@
       font-size: var(--btn-fs) !important;
 }
     </style>
+
+	<style>
+/* === Hovers inversés & états d’interaction (à coller en fin de CSS) === */
+.btn{
+  transition: background .18s ease, color .18s ease, border-color .18s ease,
+              transform .06s ease, box-shadow .18s ease;
+}
+.btn:active{ transform: translateY(1px) scale(.99); }
+
+/* Primaire : plein → contour (inversion) */
+.btn-primary{
+  background: linear-gradient(135deg, var(--brand), #8bb3ff);
+  color:#06101e;
+  border:1px solid transparent;
+}
+.btn-primary:hover,
+.btn-primary:focus-visible{
+  background: transparent;
+  color: var(--brand);                    /* texte bleu */
+  border-color: var(--brand);             /* contour bleu */
+  box-shadow: var(--ring);
+}
+
+/* Ghost : contour → plein (inversion) */
+.btn-ghost{
+  background: transparent;
+  border:1px solid rgba(255,255,255,.22);
+  color: var(--text);
+}
+.btn-ghost:hover,
+.btn-ghost:focus-visible{
+  background: linear-gradient(135deg, var(--brand), #8bb3ff);
+  color:#06101e;                          /* texte sombre lisible sur le dégradé */
+  border-color: transparent;
+  box-shadow: var(--ring);
+}
+
+/* Liens du menu mobile : hover lisible et net */
+.mobile-menu a{
+  transition: background .15s ease, color .15s ease;
+}
+.mobile-menu a:hover,
+.mobile-menu a:focus-visible{
+  background: linear-gradient(135deg, rgba(108,158,255,.25), rgba(0,229,153,.25));
+  color:#fff;
+}
+
+/* Burger : même logique que le ghost → plein */
+.hamburger{ transition: background .15s ease, color .15s ease, border-color .15s ease; }
+.hamburger:hover,
+.hamburger:focus-visible{
+  background: linear-gradient(135deg, var(--brand), #8bb3ff);
+  color:#06101e;
+  border-color: transparent;
+  box-shadow: var(--ring);
+}
+
+/* États désactivés (si jamais) */
+.btn:disabled,
+.btn[aria-disabled="true"]{
+  opacity:.6; cursor:not-allowed; transform:none !important; filter:grayscale(.15);
+}
+
+/* Respecte la préférence “réduire les animations” */
+@media (prefers-reduced-motion: reduce){
+  .btn, .mobile-menu a, .hamburger{ transition: none; }
+}
+</style>
 	
 <!-- ======= FORCE DARK MODE (ajout minimal, ne touche pas au contenu) ======= -->
   <style>
