@@ -115,6 +115,19 @@
     .title-with-icon{display:flex; align-items:center; gap:.6rem}
   </style>
 
+  <style>
+    :root{
+    --btn-py: .65rem;   /* hauteur (avant .9rem) */
+    --btn-px: .90rem;   /* largeur  (avant 1.2rem) */
+    --btn-fs: .95rem;   /* texte    (≈ 15.2px)     */
+      }
+
+     .btn{
+      padding: var(--btn-py) var(--btn-px) !important;
+      font-size: var(--btn-fs) !important;
+}
+    </style>
+	
 <!-- ======= FORCE DARK MODE (ajout minimal, ne touche pas au contenu) ======= -->
   <style>
     :root{ color-scheme: dark; }             /* contrôles/formulaires en sombre */
