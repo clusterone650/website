@@ -57,6 +57,44 @@
     }
     .mobile-open .mobile-menu{display:block}
   </style>
+
+<!-- ======= FORCE DARK MODE (ajout minimal, ne touche pas au contenu) ======= -->
+  <style>
+    :root{ color-scheme: dark; }             /* contrôles/formulaires en sombre */
+    html, body { background:#0b0f17; }       /* évite tout flash blanc mobile */
+
+    /* Si l’OS est en “clair”, on RE-définit quand même les variables en sombre */
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#0b0f17;
+        --panel:#121826;
+        --text:#e7ebf2;
+        --muted:#98a2b3;
+        --brand:#6c9eff;
+        --brand2:#00e599;
+        --accent:#ffd166;
+        --danger:#ff6b6b;
+        --radius:16px;
+        --shadow:0 10px 30px rgba(0,0,0,.35);
+        --ring:0 0 0 4px rgba(108,158,255,.35);
+        --maxw:1180px;
+      }
+      body{ background:var(--bg); color:var(--text); }
+    }
+  </style>
+  <!-- ======================================================================= -->
+	<style>
+		.bg-grid { z-index: 0; }     /* au lieu de -1 */
+		.bg-halo { z-index: -1; }    /* le halo reste derrière la grille */
+	</style>
+
+	<style>
+	header, .hero, .section, footer { 
+  	position: relative; 
+  	z-index: 1; 
+	}
+	</style>
+  
 </head>
 <body>
   <header>
