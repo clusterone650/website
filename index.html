@@ -182,12 +182,12 @@
 }
 	</style>
 	
-<!-- ======= FORCE DARK MODE (ajout minimal, ne touche pas au contenu) ======= -->
+<!-- ======= FORCE DARK MODE  ======= -->
   <style>
     :root{ color-scheme: dark; }             /* contrôles/formulaires en sombre */
     html, body { background:#0b0f17; }       /* évite tout flash blanc mobile */
 
-    /* Si l’OS est en “clair”, on RE-définit quand même les variables en sombre */
+    /* Si l’OS est en “clair”, force quand même les variables en sombre */
     @media (prefers-color-scheme: light){
       :root{
         --bg:#0b0f17;
