@@ -8,6 +8,8 @@
   <link rel="canonical" href="https://thomas-octave.be/contact">
   <meta name="robots" content="index,follow">
   <link rel="icon" href="assets/logo2.png">
+  <!-- Cloudflare Turnstile (anti-spam) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
     :root{--bg:#0b0f17;--panel:#121826;--text:#e7ebf2;--muted:#98a2b3;--brand:#6c9eff;--brand2:#00e599;--radius:16px;--shadow:0 10px 30px rgba(0,0,0,.35);--ring:0 0 0 4px rgba(108,158,255,.35);--maxw:980px}
     @media (prefers-color-scheme: light){:root{--bg:#f7f9ff;--panel:#ffffff;--text:#0e1320;--muted:#5b6471;--shadow:0 10px 25px rgba(18,22,34,.08)}}
@@ -175,6 +177,8 @@
             <input class="input" type="email" name="email" placeholder="Votre e‑mail" aria-label="Email" required>
             <input class="input" name="subject" placeholder="Objet (ex. Dépannage Wi‑Fi)" aria-label="Objet" required>
             <textarea class="input" name="message" rows="6" placeholder="Décrivez votre besoin…" aria-label="Message" required></textarea>
+            
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAFJOEFtazdTXZQTu" data-theme="dark" data-language="fr"></div>
             <button class="btn btn-primary" type="submit">Envoyer</button>
             <p id="form-status" class="muted" role="status" aria-live="polite"></p>
           </form>
@@ -229,14 +233,24 @@
     if(form){
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
+        const data=new FormData(form);
+        // Turnstile ajoute automatiquement le champ "cf-turnstile-response"
+        if(!data.get('cf-turnstile-response')){
+          status.textContent='Merci de valider la vérification anti-spam avant d’envoyer.';
+          return;
+        }
         status.textContent='Envoi en cours…';
         try{
-          const data=new FormData(form);
           const res=await fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}});
           const json = await res.json().catch(()=>({ok:res.ok}));
           if(res.ok && json.ok){ status.textContent='Merci ! Votre message a bien été envoyé.'; form.reset(); }
+          else if(res.status===403){ status.textContent="La vérification anti-spam a échoué. Merci de réessayer."; }
           else{ status.textContent="Échec de l'envoi. Vous pouvez m'écrire à info@thomas-octave.be." }
         }catch(err){status.textContent="Hors‑ligne ? Écrivez‑moi à info@thomas-octave.be."}
+        finally{
+          // Un jeton Turnstile ne sert qu'une fois : on en génère un nouveau
+          if(window.turnstile){ window.turnstile.reset(); }
+        }
       });
     }
       // Menu hamburger
